@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Game} from "../../interface-models";
 import {Subscription} from "rxjs";
 import {ActivatedRoute, Params} from "@angular/router";
@@ -9,7 +9,7 @@ import {HttpService} from "../../services/http.service";
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
   gameRating = 0
   gameId: string;
   game: Game;
@@ -24,17 +24,26 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
-      this.gameId = params['id'];
+      this.gameId = params['game-id'];
       this.getGameDetails(this.gameId);
     });
+  }
+
+  ngOnDestroy() {
+    if (this.gameSub) {
+      this.gameSub.unsubscribe();
+    }
+    if (this.routeSub) {
+      this.routeSub.unsubscribe()
+    }
   }
 
   getGameDetails(id: string): void {
     this.gameSub = this.httpService
       .getGameDetails(id)
-      .subscribe((gameResp: Game) => {
-        this.game = gameResp;
-
+      .subscribe((gameResponse: Game) => {
+        console.log(gameResponse)
+        this.game = gameResponse;
         setTimeout(() => {
           this.gameRating = this.game.metacritic;
         }, 1000);
