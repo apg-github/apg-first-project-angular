@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Game} from "../../interface-models";
-import {Subscription} from "rxjs";
-import {ActivatedRoute, Params} from "@angular/router";
-import {HttpService} from "../../services/http.service";
+import {Game} from '../../interface-models';
+import {Subscription} from 'rxjs';
+import {ActivatedRoute, Params} from '@angular/router';
+import {HttpService} from '../../services/http.service';
 
 @Component({
   selector: 'app-details',
@@ -10,7 +10,7 @@ import {HttpService} from "../../services/http.service";
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit, OnDestroy {
-  gameRating = 0
+  gameRating = 0;
   gameId: string;
   game: Game;
   routeSub: Subscription;
@@ -34,7 +34,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.gameSub.unsubscribe();
     }
     if (this.routeSub) {
-      this.routeSub.unsubscribe()
+      this.routeSub.unsubscribe();
     }
   }
 
@@ -42,8 +42,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.gameSub = this.httpService
       .getGameDetails(id)
       .subscribe((gameResponse: Game) => {
-        console.log(gameResponse)
-        if (gameResponse != undefined){
+        console.log(gameResponse);
+        if (gameResponse !== undefined){
           this.game = gameResponse;
         }
         setTimeout(() => {
@@ -54,13 +54,13 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   getColor(value: number): string {
     if (value > 75) {
-      return '#5ee432'
+      return '#5ee432';
     } else if (value > 50) {
-      return '#fffa50'
+      return '#fffa50';
     } else if (value > 30) {
-      return '#f7aa38'
+      return '#f7aa38';
     } else {
-      return '#ef4655'
+      return '#ef4655';
     }
   }
 }

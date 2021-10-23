@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {forkJoin, Observable} from "rxjs";
-import {environment as env} from "../../environments/environment";
-import {APIResponse, Game} from "../interface-models";
-import {map} from "rxjs/operators";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {forkJoin, Observable} from 'rxjs';
+import {environment as env} from '../../environments/environment';
+import {APIResponse, Game} from '../interface-models';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +17,15 @@ export class HttpService {
     ordering: string,
     search?: string
   ): Observable<APIResponse<Game>> {
-    let params = new HttpParams().set('ordering', ordering)
+    let params = new HttpParams().set('ordering', ordering);
 
     if (search) {
-      params = new HttpParams().set("ordering", ordering).set('search', search)
+      params = new HttpParams().set('ordering', ordering).set('search', search);
     }
 
     return this.http.get<APIResponse<Game>>(`${env.BASE_URL}/games`, {
-      params: params,
-    })
+      params,
+    });
   }
 
   getGameDetails(id: string): Observable<Game> {
@@ -44,9 +44,9 @@ export class HttpService {
     }).pipe(
       map((resp: any) => {
         return {
-          ...resp['gameInfoRequest'],
-          screenshots: resp['gameScreenshotsRequest']?.results,
-          trailers: resp['gameTrailersRequest']?.results,
+          ...resp.gameInfoRequest,
+          screenshots: resp.gameScreenshotsRequest?.results,
+          trailers: resp.gameTrailersRequest?.results,
         };
       })
     );

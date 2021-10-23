@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Game} from "../../interface-models";
+import {Game} from '../../interface-models';
 
 @Component({
   selector: 'app-game-tabs',
@@ -7,7 +7,7 @@ import {Game} from "../../interface-models";
   styleUrls: ['./game-tabs.component.scss']
 })
 export class GameTabsComponent implements OnInit, OnDestroy {
-  @Input() game: Game
+  @Input() game: Game;
 
   constructor() { }
 
