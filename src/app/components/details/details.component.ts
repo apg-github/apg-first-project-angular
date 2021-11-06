@@ -42,7 +42,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.gameSub = this.httpService
       .getGameDetails(id)
       .subscribe((gameResponse: Game) => {
-        console.log(gameResponse);
         if (gameResponse !== undefined){
           this.game = gameResponse;
         }
