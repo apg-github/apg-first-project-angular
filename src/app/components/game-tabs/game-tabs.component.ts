@@ -16,6 +16,4 @@ export class GameTabsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
   }
-
-
 }

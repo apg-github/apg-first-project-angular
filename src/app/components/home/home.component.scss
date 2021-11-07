@@ -44,12 +44,12 @@
   height: 350px;
   border-radius: 5px;
   background-color: #202020;
-  box-shadow: 4px 3px 8px 0 rgb(190 110 20);
+  box-shadow: 4px 3px 8px 0 blueviolet;
   transition-duration: .3s;
   cursor: pointer;
 
   &:hover {
-    box-shadow: 4px 3px 11px 6px rgb(200 152 100);
+    box-shadow: 4px 3px 11px 6px red;
     transform: translateY(-4px);
   }
 

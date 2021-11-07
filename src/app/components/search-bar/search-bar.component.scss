@@ -23,7 +23,8 @@
     padding: 10px;
     width: 300px;
     border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     outline: none;
     border: none
   }
@@ -34,17 +35,17 @@
     outline: none;
     background: blueviolet;
     padding: 10px;
-    border-left: 1px solid rgba(0,0,0,0.3);
-    border-top-right-radius:  5px;
-    border-bottom-right-radius:  5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-left: 5px;
     color: #fff;
     transition-duration:  0.3s;
     cursor: pointer;
 
-    &-hover {
-      color: #3f51b5;
-      background-color: #fff;
-      border: 1px solid #3f51b5
+    &:hover {
+      color: #fff;
+      background-color: rgba(137, 69, 205, 0.64);
     }
   }
 }
