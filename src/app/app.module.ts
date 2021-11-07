@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -18,6 +18,7 @@ import {HttpHeadersInterceptor} from './interceptors/http-headers.interceptor';
 import {HttpErrorsInterceptor} from './interceptors/http-errors.interceptor';
 import {DetailsComponent} from './components/details/details.component';
 import {GameTabsComponent} from './components/game-tabs/game-tabs.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {GameTabsComponent} from './components/game-tabs/game-tabs.component';
     MatFormFieldModule,
     MatSelectModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    NgxSpinnerModule
   ],
   providers: [
     {
@@ -51,6 +53,7 @@ import {GameTabsComponent} from './components/game-tabs/game-tabs.component';
       multi: true
     },
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule {

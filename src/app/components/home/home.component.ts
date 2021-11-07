@@ -3,6 +3,7 @@ import {APIResponse, Game} from '../../interface-models';
 import {HttpService} from '../../services/http.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -18,18 +19,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private httpService: HttpService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {
   }
 
   ngOnInit(): void {
-    this.gameSub = this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
-      if (params['game-search']) {
-        this.searchGames('metacrit', params['game-search']);
-      } else {
-        this.searchGames('metacrit');
-      }
+    this.spinner.show().then(() => {
+      this.gameSub = this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
+        if (params['game-search']) {
+          this.searchGames('metacrit', params['game-search']);
+        } else {
+          this.searchGames('metacrit');
+        }
+      });
     });
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
   }
 
   searchGames(sort: string, search?: string): void {
@@ -46,10 +53,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   openGameDetails(gameId: string): void {
+    this.spinner.show();
     this.router.navigate(['details', gameId]);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.gameSub) {
       this.gameSub.unsubscribe();
     }

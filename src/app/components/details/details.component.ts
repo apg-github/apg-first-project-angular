@@ -3,6 +3,7 @@ import {Game} from '../../interface-models';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {HttpService} from '../../services/http.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-details',
@@ -18,18 +19,23 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private spinner: NgxSpinnerService
   ) {
   }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
+    this.spinner.show();
     this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
       this.gameId = params['game-id'];
       this.getGameDetails(this.gameId);
     });
+     setTimeout(() => {
+       this.spinner.hide();
+     }, 2000);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.gameSub) {
       this.gameSub.unsubscribe();
     }
@@ -42,7 +48,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.gameSub = this.httpService
       .getGameDetails(id)
       .subscribe((gameResponse: Game) => {
-        if (gameResponse !== undefined){
+        if (gameResponse !== undefined) {
           this.game = gameResponse;
         }
         setTimeout(() => {
