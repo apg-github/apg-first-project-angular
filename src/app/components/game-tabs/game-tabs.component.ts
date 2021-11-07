@@ -14,6 +14,10 @@ export class GameTabsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
+  }
+
+  obtainProperGameDescription(): string {
+    return this.game.description.replace(/<[^>]*>?/gm, '');
   }
 }

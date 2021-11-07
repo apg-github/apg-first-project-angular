@@ -19,7 +19,7 @@
         Website:
         <a class="game-tabs-link" href="{{game.website}}" target="_blank">{{game.website}}</a>
       </p>
-      <div class="game-description">{{game.description}}</div>
+      <div class="game-description">{{obtainProperGameDescription()}}</div>
       <p class="game-tabs-votes">
         <ng-container *ngFor="let rating of game.ratings">
           <span *ngIf="rating.title === 'exceptional'">
