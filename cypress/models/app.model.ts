@@ -1,34 +1,38 @@
 import {SearchBarModel} from './search-bar.model';
 import {FiltersModel} from './filters.model';
 import {GameDetailsModel} from './game-details.model';
+import {Component} from './common/common.model';
+import {GameCardModel} from "./game-card.model";
 
-export class AppModel {
+export class AppModel extends Component{
   private selector: JQuery.Selector = 'app-root';
   private games: JQuery.Selector = '.games';
-  private searchBar: SearchBarModel;
-  private filters: FiltersModel;
-  private gameDetails: GameDetailsModel;
+  readonly searchBar: SearchBarModel;
+  readonly filters: FiltersModel;
+  readonly gameDetails: GameDetailsModel;
 
   constructor() {
+    super('app-root');
+    this.selector = 'app-root';
     this.searchBar = new SearchBarModel();
     this.filters = new FiltersModel();
     this.gameDetails = new GameDetailsModel();
   }
 
-  appExists =  () => {
+  appExists = () => {
     cy.get(this.selector).should('exist');
   }
 
-  allComponentsExist =  () => {
-     this.appExists();
-     this.searchBar.exists();
-     this.filters.exists();
+  allComponentsExist = () => {
+    this.appExists();
+    this.searchBar.exists();
+    this.filters.exists();
   }
 
   checkIfInitialGamesAreFetched = () => {
     cy
       .get(this.games).should('exist')
-      .find('.game').should('have.length', 20); // we fetched 20 games initially
+      .find('.game').should('have.length', 20); // we fetch 20 games initially
   }
 
   checkDetails = () => {
@@ -36,6 +40,11 @@ export class AppModel {
       .get('.game')
       .first()
       .click();
+  }
+
+  retrieveGameCardByName = (gameName: string) => {
+    cy.get('.game-name').contains(gameName).parent().find('.game').should('exist');
+    return new GameCardModel(gameName);
   }
 }
 
