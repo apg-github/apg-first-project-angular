@@ -13,6 +13,7 @@
       <mat-option value="metacritic">Metacritic</mat-option>
     </mat-select>
   </mat-form-field>
+  <button *ngIf="sort" (click)="clearFilters()">Clear filtering</button>
 </div>
 
 <div class="games">
@@ -24,7 +25,10 @@
              src="{{game.background_image}}"
              alt="thumbnail"
              class="game-thumbnail">
-        <p *ngIf="!game.background_image">No image :(</p>
+        <img *ngIf="!game.background_image"
+        src="./assets/images/default-image.jpg"
+        alt="thumbnail"
+        class="game-thumbnail">
       </div>
       <div class="game-description">
         <p class="game-name">{{game.name}}</p>

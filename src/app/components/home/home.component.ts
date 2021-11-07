@@ -40,6 +40,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
+  clearFilters(): void {
+    this.sort = null;
+    this.searchGames('metacrit');
+  }
+
   openGameDetails(gameId: string): void {
     this.router.navigate(['details', gameId]);
   }

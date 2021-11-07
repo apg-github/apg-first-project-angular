@@ -26,12 +26,18 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     outline: none;
-    border: none
+    border: none;
+    font-size: 14px;
+
+    &::selection {
+      color: white;
+      background-color: rgba(255, 0, 0, 0.3);
+    }
   }
 
 
   &-button {
-    border:none;
+    border: none;
     outline: none;
     background: blueviolet;
     padding: 10px;
@@ -40,12 +46,13 @@
     border-bottom-right-radius: 5px;
     margin-left: 5px;
     color: #fff;
-    transition-duration:  0.3s;
+    transition-duration: 0.3s;
     cursor: pointer;
+    font-size: 14px;
 
     &:hover {
       color: #fff;
-      background-color: rgba(137, 69, 205, 0.64);
+      background-color: rgba(255, 0, 0, 1);
     }
   }
 }

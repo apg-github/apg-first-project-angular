@@ -1,10 +1,8 @@
 <div class="search-container">
-
   <form action="" class="search-form" #form="ngForm" (ngSubmit)="onSubmit(form)">
-    <span class="logo" routerLink="/">HOME</span>
-    <input type="text" class="search-input" name="search" ngModel placeholder="Search Games!" />
-
-
-  <button class="search-button">Search</button>
+    <span class="logo" (click)="searchInputRef.value=''" routerLink="/">HOME</span>
+    <input #searchInputRef spellcheck="false" type="text" class="search-input" name="search" ngModel
+           placeholder="Search Games!"/>
+    <button class="search-button">Search</button>
   </form>
 </div>

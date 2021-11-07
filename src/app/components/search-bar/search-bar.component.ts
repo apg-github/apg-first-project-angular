@@ -11,9 +11,16 @@ export class SearchBarComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  cleanInput(form: NgForm): void{
+    form.value.search = '';
+  }
+
   ngOnInit(): void {
   }
-  onSubmit(form: NgForm) {
-    this.router.navigate(['search', form.value.search]);
+
+  onSubmit(form: NgForm): void {
+    if (form.value.search.trim() !== '') {
+      this.router.navigate(['search', form.value.search]);
+    }
   }
 }
