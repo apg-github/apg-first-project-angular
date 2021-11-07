@@ -11,7 +11,7 @@ describe('Components visibility', () => {
     app.checkIfInitialGamesAreFetched();
   });
 
-  it('checks if detail component is working', () => {
+  it('checks if details component is working', () => {
     app.checkDetails();
   });
 });

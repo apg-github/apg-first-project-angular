@@ -4,6 +4,7 @@ export class SearchBarModel extends Component {
   private selector: JQuery.Selector;
   private searchInput: JQuery.Selector = '.search-input';
   private searchButton: JQuery.Selector = '.search-button';
+  private home: JQuery.Selector = '.logo';
 
   constructor() {
     super('.search-container');
@@ -16,6 +17,9 @@ export class SearchBarModel extends Component {
       .get(this.searchButton).click();
   }
 
+  clickHome = () => {
+    cy.get(this.home).click();
+  }
 
   exists = () => {
     cy.get(this.selector).should('exist');

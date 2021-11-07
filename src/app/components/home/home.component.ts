@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.spinner.show().then(() => {
       this.gameSub = this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
         if (params['game-search']) {
           this.searchGames('metacrit', params['game-search']);
@@ -33,18 +32,19 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.searchGames('metacrit');
         }
       });
-    });
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 2000);
   }
 
   searchGames(sort: string, search?: string): void {
+    this.spinner.show();
     this.httpService
       .getGameList(sort, search)
       .subscribe((gameList: APIResponse<Game>) => {
+        console.log(gameList.results);
         this.games = gameList.results;
       });
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
   }
 
   clearFilters(): void {

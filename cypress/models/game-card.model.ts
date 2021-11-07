@@ -11,7 +11,7 @@ export class GameCardModel {
 
   checkIfDetailsAreOpened = () => {
     cy.get('.details').should('exist');
-    cy.get('game-header-title').contains(this.gameName).should('exist');
+    cy.get('.game-header-title').contains(this.gameName).should('exist');
   }
 
   exists = () => {

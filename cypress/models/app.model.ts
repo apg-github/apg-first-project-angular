@@ -2,7 +2,7 @@ import {SearchBarModel} from './search-bar.model';
 import {FiltersModel} from './filters.model';
 import {GameDetailsModel} from './game-details.model';
 import {Component} from './common/common.model';
-import {GameCardModel} from "./game-card.model";
+import {GameCardModel} from './game-card.model';
 
 export class AppModel extends Component{
   private selector: JQuery.Selector = 'app-root';
@@ -43,7 +43,7 @@ export class AppModel extends Component{
   }
 
   retrieveGameCardByName = (gameName: string) => {
-    cy.get('.game-name').contains(gameName).parent().find('.game').should('exist');
+    cy.get('.game-name').contains(gameName).closest('.game').should('exist');
     return new GameCardModel(gameName);
   }
 }
