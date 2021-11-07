@@ -6,7 +6,7 @@
   button {
     border: none;
     outline: none;
-    background: blueviolet;
+    background: #ec3030;
     padding: 5px;
     border-radius: 10px;
     margin-left: 5px;
@@ -16,15 +16,15 @@
     font-size: 12px;
 
     &:hover {
-      color: #fff;
-      background-color: rgba(255, 0, 0, 1);
+      color: #000000;
+      background-color: rgb(255, 255, 255);
     }
   }
 }
 
 ::ng-deep {
   .mat-form-field-infix {
-    background-color: blueviolet;
+    background-color: #ec3030;
     border-color: #fff !important;
     border-top: none;
     padding-left: 5px !important;
@@ -62,12 +62,12 @@
   height: 350px;
   border-radius: 5px;
   background-color: #202020;
-  box-shadow: 4px 3px 8px 0 blueviolet;
+  box-shadow: 4px 3px 8px 0 #ec3030;
   transition-duration: .3s;
   cursor: pointer;
 
   &:hover {
-    box-shadow: 4px 3px 11px 6px red;
+    box-shadow: 4px 3px 11px 6px white;
     transform: translateY(-4px);
   }
 
