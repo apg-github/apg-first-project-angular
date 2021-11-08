@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'details/:game-id',
     component: DetailsComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
   }
 ];
 

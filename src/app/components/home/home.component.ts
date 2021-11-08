@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public gamesHaveNextPage: boolean;
   public pageCounter: number;
-  private searchFromUrl: Params;
 
   ngOnInit(): void {
     this.gameSub = this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {

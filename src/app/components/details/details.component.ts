@@ -14,22 +14,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   gameRating = 0;
   gameId: string;
   game: Game;
-  /*  game: Game = {
-      id: 0,
-      background_image: 'loading',
-      name: 'loading',
-      released: 'loading',
-      metacritic_url: 'loading',
-      website: 'loading',
-      description: 'loading',
-      metacritic: 0,
-      genres: [{name: 'loading'}],
-      parent_platforms: [{platform: {name: 'loading', slug: 'loading'}}],
-      publishers: [{name: 'loading'}],
-      ratings: [{id: 0, count: 0, title: 'loading'}],
-      screenshots: [{image: 'loading'}],
-      trailers: [{data: {max: 'loading'}}],
-    };*/
   routeSub: Subscription;
   gameSub: Subscription;
   isDataAvailable = false;

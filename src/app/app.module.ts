@@ -26,7 +26,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     SearchBarComponent,
     HomeComponent,
     DetailsComponent,
-    GameTabsComponent
+    GameTabsComponent,
   ],
   imports: [
     BrowserModule,
