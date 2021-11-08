@@ -15,16 +15,37 @@ export class HttpService {
 
   getGameList(
     ordering: string,
-    search?: string
+    search?: string,
+    pageCounter?: number
   ): Observable<APIResponse<Game>> {
-    let params = new HttpParams().set('ordering', ordering);
+    const paramObj = {
+      ordering: undefined,
+      search: undefined,
+      page: undefined
+    };
 
-    if (search) {
-      params = new HttpParams().set('search', search);
+    if (ordering !== undefined) {
+      paramObj.ordering = ordering;
     }
 
+    if (search !== undefined) {
+      paramObj.search = search;
+    }
+
+    if (pageCounter) {
+      paramObj.page = pageCounter;
+    }
+
+    let params = new HttpParams();
+
+    Object.keys(paramObj).forEach(key => {
+      if (paramObj[key] !== undefined) {
+        params = params.set(key, paramObj[key]);
+      }
+    });
+
     return this.http.get<APIResponse<Game>>(`${env.BASE_URL}/games`, {
-      params,
+      params
     });
   }
 

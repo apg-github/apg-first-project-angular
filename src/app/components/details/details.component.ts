@@ -14,8 +14,25 @@ export class DetailsComponent implements OnInit, OnDestroy {
   gameRating = 0;
   gameId: string;
   game: Game;
+  /*  game: Game = {
+      id: 0,
+      background_image: 'loading',
+      name: 'loading',
+      released: 'loading',
+      metacritic_url: 'loading',
+      website: 'loading',
+      description: 'loading',
+      metacritic: 0,
+      genres: [{name: 'loading'}],
+      parent_platforms: [{platform: {name: 'loading', slug: 'loading'}}],
+      publishers: [{name: 'loading'}],
+      ratings: [{id: 0, count: 0, title: 'loading'}],
+      screenshots: [{image: 'loading'}],
+      trailers: [{data: {max: 'loading'}}],
+    };*/
   routeSub: Subscription;
   gameSub: Subscription;
+  isDataAvailable = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -24,15 +41,17 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ) {
   }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.spinner.show();
+
     this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
       this.gameId = params['game-id'];
       this.getGameDetails(this.gameId);
     });
-     setTimeout(() => {
-       this.spinner.hide();
-     }, 2000);
+
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
   }
 
   ngOnDestroy(): void {
@@ -54,6 +73,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           this.gameRating = this.game.metacritic;
         }, 1000);
+        this.isDataAvailable = true;
       });
   }
 

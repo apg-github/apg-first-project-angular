@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {APIResponse, Game} from '../../interface-models';
 import {HttpService} from '../../services/http.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public games: Array<Game>;
   private routeSub: Subscription;
   private gameSub: Subscription;
+  private params: Params;
 
   constructor(
     private httpService: HttpService,
@@ -24,32 +25,63 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {
   }
 
+  public gamesHaveNextPage: boolean;
+  public pageCounter: number;
+  private searchFromUrl: Params;
+
   ngOnInit(): void {
-      this.gameSub = this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
-        if (params['game-search']) {
-          this.searchGames('metacrit', params['game-search']);
-        } else {
-          this.searchGames('metacrit');
-        }
-      });
+    this.gameSub = this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
+      this.params = params;
+      if (params['game-search']) {
+        this.searchGames(this.sort, this.params);
+      } else {
+        this.searchGames(this.sort);
+      }
+    });
   }
 
-  searchGames(sort: string, search?: string): void {
+  searchGames(sort = this.sort, search = this.params): void {
     this.spinner.show();
+    this.gamesHaveNextPage = false;
+    this.pageCounter = 1;
+
     this.httpService
-      .getGameList(sort, search)
+      .getGameList(this.sort, search['game-search'])
       .subscribe((gameList: APIResponse<Game>) => {
-        console.log(gameList.results);
         this.games = gameList.results;
+        if (gameList.next) {
+          this.gamesHaveNextPage = true;
+          this.pageCounter++;
+        }
       });
+
     setTimeout(() => {
       this.spinner.hide();
     }, 2000);
   }
 
+  fetchMoreGames(pageCounter = this.pageCounter, sort = this.sort, search = this.params): void {
+    this.spinner.show();
+    this.gamesHaveNextPage = false;
+    this.httpService
+      .getGameList(this.sort, search['game-search'], this.pageCounter)
+      .subscribe((gameList: APIResponse<Game>) => {
+        this.games.push(...gameList.results);
+
+        if (gameList.next) {
+          this.gamesHaveNextPage = true;
+          this.pageCounter++;
+        }
+
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 2000);
+      });
+  }
+
   clearFilters(): void {
-    this.sort = null;
-    this.searchGames('metacrit');
+    this.sort = undefined;
+    this.searchGames(undefined, this.params);
   }
 
   openGameDetails(gameId: string): void {
